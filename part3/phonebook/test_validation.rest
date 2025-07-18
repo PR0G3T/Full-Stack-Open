@@ -1,0 +1,53 @@
+### Test Exercise 3.19: Name validation (too short)
+POST http://localhost:3001/api/persons
+Content-Type: application/json
+
+{
+  "name": "ju",
+  "number": "020-1231243"
+}
+
+### Test Exercise 3.20: Phone number validation (invalid format)
+POST http://localhost:3001/api/persons
+Content-Type: application/json
+
+{
+  "name": "Valid Name",
+  "number": "1234556"
+}
+
+### Test Exercise 3.20: Phone number validation (invalid format 2)
+POST http://localhost:3001/api/persons
+Content-Type: application/json
+
+{
+  "name": "Another Valid Name",
+  "number": "1-22334455"
+}
+
+### Test Exercise 3.20: Phone number validation (invalid format 3)
+POST http://localhost:3001/api/persons
+Content-Type: application/json
+
+{
+  "name": "Yet Another Valid Name",
+  "number": "10-22-334455"
+}
+
+### Test valid data
+POST http://localhost:3001/api/persons
+Content-Type: application/json
+
+{
+  "name": "Valid User",
+  "number": "09-1234556"
+}
+
+### Test valid data with 3-digit prefix
+POST http://localhost:3001/api/persons
+Content-Type: application/json
+
+{
+  "name": "Another Valid User",
+  "number": "040-22334455"
+}
