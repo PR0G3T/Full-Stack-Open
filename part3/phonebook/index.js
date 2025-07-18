@@ -5,32 +5,26 @@ const cors = require('cors')
 const Person = require('./models/person')
 const app = express()
 
-// Custom token for logging request body
 morgan.token('body', (req) => {
   return JSON.stringify(req.body)
 })
 
-// Middleware
 app.use(cors())
 app.use(express.static('dist'))
 app.use(express.json())
 
-// Exercise 3.7: Morgan with tiny configuration
 app.use(morgan('tiny'))
 
-// Exercise 3.8: Additional morgan configuration for POST requests to show request body
 app.use(morgan(':method :url :status :res[content-length] - :response-time ms :body', {
   skip: function (req) { return req.method !== 'POST' }
 }))
 
-// Exercise 3.13: GET all persons from database
 app.get('/api/persons', (request, response) => {
   Person.find({}).then(persons => {
     response.json(persons)
   })
 })
 
-// Exercise 3.2: Info page
 app.get('/info', (request, response) => {
   const currentTime = new Date()
 
@@ -45,7 +39,6 @@ app.get('/info', (request, response) => {
   })
 })
 
-// Exercise 3.3: GET single person
 app.get('/api/persons/:id', (request, response, next) => {
   Person.findById(request.params.id)
     .then(person => {
@@ -58,7 +51,6 @@ app.get('/api/persons/:id', (request, response, next) => {
     .catch(error => next(error))
 })
 
-// Exercise 3.4: DELETE person
 app.delete('/api/persons/:id', (request, response, next) => {
   Person.findByIdAndDelete(request.params.id)
     .then(() => {
@@ -67,18 +59,15 @@ app.delete('/api/persons/:id', (request, response, next) => {
     .catch(error => next(error))
 })
 
-// Exercise 3.14: POST new person to database
 app.post('/api/persons', (request, response, next) => {
   const body = request.body
 
-  // Check if name or number is missing
   if (!body.name || !body.number) {
     return response.status(400).json({
       error: 'name or number is missing'
     })
   }
 
-  // Create new person
   const person = new Person({
     name: body.name,
     number: body.number
@@ -91,11 +80,9 @@ app.post('/api/persons', (request, response, next) => {
     .catch(error => next(error))
 })
 
-// Exercise 3.17: PUT request to update person
 app.put('/api/persons/:id', (request, response, next) => {
   const { name, number } = request.body
 
-  // Check if name or number is missing
   if (!name || !number) {
     return response.status(400).json({
       error: 'name or number is missing'
@@ -118,7 +105,6 @@ app.put('/api/persons/:id', (request, response, next) => {
     .catch(error => next(error))
 })
 
-// Enhanced error handling middleware
 const errorHandler = (error, request, response, next) => {
   console.error(error.message)
 
@@ -133,7 +119,6 @@ const errorHandler = (error, request, response, next) => {
   next(error)
 }
 
-// this has to be the last loaded middleware.
 app.use(errorHandler)
 
 const PORT = process.env.PORT || 3001

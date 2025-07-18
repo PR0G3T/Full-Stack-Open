@@ -7,26 +7,20 @@ if (process.argv.length < 3) {
 
 const password = process.argv[2]
 
-// MongoDB Atlas connection string
-// Replace <username>, <cluster>, and <database> with your actual values
 const url = `mongodb+srv://fullstack:${password}@cluster0.mongodb.net/phonebookApp?retryWrites=true&w=majority`
 
 mongoose.set('strictQuery', false)
 
-// Define the schema for a person
 const personSchema = new mongoose.Schema({
   name: String,
   number: String,
 })
 
-// Create the model
 const Person = mongoose.model('Person', personSchema)
 
-// Connect to MongoDB
 mongoose.connect(url)
 
 if (process.argv.length === 3) {
-  // Only password provided - list all persons
   console.log('phonebook:')
   Person.find({}).then(result => {
     result.forEach(person => {
@@ -35,7 +29,6 @@ if (process.argv.length === 3) {
     mongoose.connection.close()
   })
 } else if (process.argv.length === 5) {
-  // Password, name, and number provided - add new person
   const name = process.argv[3]
   const number = process.argv[4]
 
