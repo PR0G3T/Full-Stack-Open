@@ -25,10 +25,6 @@ This is a Node.js backend application for managing a phonebook, implementing exe
 
 This is the backend for the Full Stack Open Phonebook application.
 
-## Live Application
-
-🌐 **Live App**: [Add your deployment URL here]
-
 ## API Endpoints
 
 - `GET /api/persons` - Get all persons

@@ -1,0 +1,28 @@
+{
+  "name": "bloglist",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node --watch index.js",
+    "dev": "node --watch index.js",
+    "test": "cross-env NODE_ENV=test node --test tests/*.test.js",
+    "test:watch": "cross-env NODE_ENV=test node --test --watch tests/*.test.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "dotenv": "^17.2.0",
+    "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.16.4"
+  },
+  "devDependencies": {
+    "cors": "^2.8.5",
+    "cross-env": "^7.0.3",
+    "supertest": "^7.1.3"
+  }
+}
